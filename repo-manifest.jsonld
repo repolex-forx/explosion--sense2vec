@@ -8,7 +8,7 @@
     {
       "@id": "https://repolex.ai/r/explosion/sense2vec/commit/72129b83ead7299df060df0e8ebc52df7766ae9a",
       "git:hexsha": "72129b83ead7299df060df0e8ebc52df7766ae9a",
-      "repolex:parseStatus": "metadata_complete"
+      "repolex:parseStatus": "ast_complete"
     },
     {
       "@id": "https://repolex.ai/r/explosion/sense2vec/commit/5a2c0a9d1cadc428ac17e7fe90252fc41235fd0f",
