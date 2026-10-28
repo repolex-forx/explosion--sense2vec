@@ -1,1 +1,115 @@
-Initializing
+# Repolex Knowledge Graph of explosion/sense2vec
+
+RDF knowledge graph data for [explosion/sense2vec](https://github.com/explosion/sense2vec), parsed by [repolex](https://repolex.ai).
+
+> **Note**: This data is experimental and subject to change without notice.
+
+## How to use this data
+
+The easiest way to get started is to install the [rlex](https://github.com/repolex-ai/rlex) query tool:
+
+```bash
+cargo install --git https://github.com/repolex-ai/rlex
+```
+
+Verify the install:
+
+```bash
+rlex --help
+```
+
+**rlex is designed to be used primarily by LLMs in a terminal.** Start up your favorite AI assistant and ask it to use rlex. It handles the SPARQL — you just ask questions in plain English.
+
+To load this repo's data:
+
+```bash
+rlex download explosion/sense2vec
+```
+
+Consult `rlex --help` for other options, including SPARQL queries, HTTP server, and interactive visualization.
+
+## Data structure
+
+All data is stored as gzip-compressed [N-Quads](https://www.w3.org/TR/n-quads/) (`.nq.gz`), a standard RDF format that can be loaded into any triplestore or graph database.
+
+```
+.
+├── aggregate
+│   ├── ast
+│   │   └── 72129b83ead7299df060df0e8ebc52df7766ae9a
+│   │       └── chunk-001.nq.gz
+│   └── repolex
+│       └── 72129b83ead7299df060df0e8ebc52df7766ae9a
+│           └── chunk-001.nq.gz
+├── blob
+│   ├── 0468093e8154addbb50eb328ab20d8e5b6f0e39f.nq.gz
+│   ├── 093de3374dd37b3ef590b4ea67e5824e18f04dc1.nq.gz
+│   ├── 19b4ce34a36c41323e96bc8bb179987f0fe2087f.nq.gz
+│   ├── 1e1cf8fccafd20dddbd7e2231349ccc4d9df1abc.nq.gz
+│   ├── 2272cf12b5c526a95df343ffcde94bed52bfe5d3.nq.gz
+│   ├── 27332865742aadb625785ce7eb7e904b8f3bd1bd.nq.gz
+│   ├── 298d32cbbecfaaefcb087e4d174290b5b60fb3d2.nq.gz
+│   ├── 35aa2e983a2af1d803d62a782272336c5561bb74.nq.gz
+│   ├── 40810ccae3c3d257062760c37b351672e022f138.nq.gz
+│   ├── 44a4c079a0cb36a840be1842422b79ba7620c082.nq.gz
+│   ├── 450a283dda1bd38e1259ff0624a225c6fdeaafce.nq.gz
+│   ├── 45e29ea1888c86d09f956df63e6b89937725ecdc.nq.gz
+│   ├── 4f348f67c510823cf11b3ea30361b28ae837611a.nq.gz
+│   ├── 546734d17dd664f9dc4d1cfebb4d2b0fad73cdbb.nq.gz
+│   ├── 5c50142422d787bd3b78cdabcc88eb880d2598bd.nq.gz
+│   ├── 64bee9d5df8d0cfa7c0e5c0beaed02a90103f1ad.nq.gz
+│   ├── 658d70456861ed0defc7888c63ba3aa33e267602.nq.gz
+│   ├── 6f74cdd87bff3be08c47cc325331e2760ac64943.nq.gz
+│   ├── 7a659edee94722b14045d94253c408d92f581750.nq.gz
+│   ├── 80ad994e22d68fb2bda3ebd135df3063cfd86764.nq.gz
+│   ├── 9017ba701fd019860a9897d3578f658d57ce2274.nq.gz
+│   ├── 94c6a1ecae86f47992ff02376e63480c3fd7cc34.nq.gz
+│   ├── 9d628361cfeca2ce461d9eaed9de8f585a6b88e4.nq.gz
+│   ├── 9d868d159cda5c77bc6773f19941028773396124.nq.gz
+│   ├── 9e093e3233dbe509bbe423e2889c83abecb4ad37.nq.gz
+│   ├── ae2dced154c3d29e64d8a00b9172fb723df27910.nq.gz
+│   ├── b0cc1a3f65b71a2f9449f29cb842f26714e1f528.nq.gz
+│   ├── b61eeb0e964ad30dfad8d7daad767859f8706126.nq.gz
+│   ├── bd0e174fc2632bd69ffdb192a35370b206fc0ab5.nq.gz
+│   ├── cb6c2256caf0d0f49c1cee22722a1341b5cacd34.nq.gz
+│   ├── d78a24b4650186e912776d420f3c72ba08bf6862.nq.gz
+│   ├── da58e1a1dccbc0b13eb9dee02e1807064ac968c6.nq.gz
+│   ├── e332fe497ab00b08a8356a20b6b1743ab3bea8ff.nq.gz
+│   ├── e5862fe6d4fe469717d1dffefafcb80bd625d44f.nq.gz
+│   ├── e69de29bb2d1d6434b8b29ae775ad8c2e48c5391.nq.gz
+│   └── ff6759c16061e0afda95fb911822fb5313cf2b08.nq.gz
+├── branch
+│   └── branch.nq.gz
+├── commit
+│   └── commit.nq.gz
+├── filetree
+│   └── 72129b83ead7299df060df0e8ebc52df7766ae9a.nq.gz
+├── issue
+│   └── issue.nq.gz
+├── pr
+│   └── pr.nq.gz
+└── tag
+    └── tag.nq.gz
+
+13 directories, 44 files
+```
+
+| Directory | What it contains |
+|-----------|-----------------|
+| `blob/` | Per-file AST graphs, content-addressed by git blob SHA. Each file in the source repo gets its own graph. |
+| `aggregate/ast/` | Combined AST graph per parsed commit. Merges all blob graphs for a snapshot of the entire codebase at that point. |
+| `aggregate/lsp/` | Language Server Protocol enrichment: resolved symbols, definitions, references, and type information. |
+| `aggregate/dataflow/` | Interprocedural data flow edges between functions and modules. |
+| `aggregate/repolex/` | Combined graph (AST + LSP + dataflow) per commit. |
+| `commit/` | Git commit metadata (author, date, message, parent links). |
+| `branch/` | Branch metadata. |
+| `tag/` | Tag metadata. |
+| `filetree/` | File tree snapshots per commit (which files existed and their blob SHAs). |
+| `audit/` | Code architecture and graph audit reports per commit. |
+
+## Source repository
+
+[explosion/sense2vec](https://github.com/explosion/sense2vec)
+
+---
+*Parsed on 2026-10-28 by [repolex](https://repolex.ai)*

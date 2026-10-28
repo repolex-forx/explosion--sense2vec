@@ -1,0 +1,11 @@
+{
+  "org": "explosion",
+  "repo": "sense2vec",
+  "versions": [
+    {
+      "commit": "72129b83ead7299df060df0e8ebc52df7766ae9a",
+      "tag": "",
+      "parsed_at": "2026-10-28T12:04:31.060697+00:00"
+    }
+  ]
+}
